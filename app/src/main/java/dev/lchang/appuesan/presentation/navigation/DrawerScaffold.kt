@@ -46,6 +46,7 @@ fun DrawerScaffold(navController: NavController,
                     label = { Text("Home")},
                     selected = false,
                     onClick = {
+                        scope.launch { drawerState.close() }
                         navController.navigate("home")
                     }
                 )
@@ -53,6 +54,7 @@ fun DrawerScaffold(navController: NavController,
                     label = { Text("Permissions")},
                     selected = false,
                     onClick = {
+                        scope.launch { drawerState.close() }
                         navController.navigate("permissions")
                     }
                 )
@@ -60,13 +62,23 @@ fun DrawerScaffold(navController: NavController,
                     label = { Text("Favorites")},
                     selected = false,
                     onClick = {
+                        scope.launch { drawerState.close() }
                         navController.navigate("favorites")
+                    }
+                )
+                NavigationDrawerItem(
+                    label = { Text("Notas SQLite")},
+                    selected = false,
+                    onClick = {
+                        scope.launch { drawerState.close() }
+                        navController.navigate("notes")
                     }
                 )
                 NavigationDrawerItem(
                     label = { Text("Real Time")},
                     selected = false,
                     onClick = {
+                        scope.launch { drawerState.close() }
                         navController.navigate("realtime")
                     }
                 )
@@ -74,6 +86,7 @@ fun DrawerScaffold(navController: NavController,
                     label = { Text("Supabase Storage")},
                     selected = false,
                     onClick = {
+                        scope.launch { drawerState.close() }
                         navController.navigate("supabase")
                     }
                 )
@@ -81,6 +94,7 @@ fun DrawerScaffold(navController: NavController,
                     label = { Text("API Football")},
                     selected = false,
                     onClick = {
+                        scope.launch { drawerState.close() }
                         navController.navigate("apifootball")
                     }
                 )
@@ -88,6 +102,7 @@ fun DrawerScaffold(navController: NavController,
                     label = { Text("Firebase Logout")},
                     selected = false,
                     onClick = {
+                        scope.launch { drawerState.close() }
                         FirebaseAuthManager.logout()
                     }
                 )
