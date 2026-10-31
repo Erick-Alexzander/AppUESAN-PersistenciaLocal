@@ -31,9 +31,12 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 
+import androidx.compose.material3.Button
+import androidx.compose.material3.HorizontalDivider
+
 @Composable
 fun ApiFootballScreen(viewModel: ApiFootballViewModel = viewModel()){
-    val countries by viewModel.countries.collectAsState()
+    val countries by viewModel.savedCountries.collectAsState()
     val selectedCountry by viewModel.selectedCountry.collectAsState()
     val teams by viewModel.teams.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
@@ -46,12 +49,28 @@ fun ApiFootballScreen(viewModel: ApiFootballViewModel = viewModel()){
     ){
         Text("Equipos de fútbol por país",
             style = MaterialTheme.typography.titleLarge)
+        
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Button(
+            onClick = { viewModel.fetchAndSaveCountries() },
+            modifier = Modifier.fillMaxWidth(),
+            enabled = !isLoading
+        ) {
+            Text("Consultar y guardar países")
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+        HorizontalDivider()
+        Spacer(modifier = Modifier.height(8.dp))
+
         Box{
             OutlinedButton(
                 onClick = {expanded = true},
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                enabled = countries.isNotEmpty()
             ) {
-                Text(selectedCountry?.name ?: "Selecciona un país")
+                Text(selectedCountry?.name ?: if (countries.isEmpty()) "Cargue los países primero" else "Selecciona un país")
             }
 
             DropdownMenu(

@@ -33,9 +33,15 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 
+import androidx.compose.runtime.remember
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+
 @Composable
 fun FavoritesScreen(viewModel: FavoritesViewModel = viewModel()) {
     val favorites by viewModel.favoriteCountries.collectAsState()
+    val dateFormat = remember { SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault()) }
 
     Column(
         modifier = Modifier
@@ -87,6 +93,16 @@ fun FavoritesScreen(viewModel: FavoritesViewModel = viewModel()) {
                                 Column {
                                     Text(country.name, style = MaterialTheme.typography.titleMedium)
                                     Text("Ranking Fifa: " + country.ranking)
+                                    val dateText = if (country.savedAt == 0L) {
+                                        "Fecha no registrada"
+                                    } else {
+                                        dateFormat.format(Date(country.savedAt))
+                                    }
+                                    Text(
+                                        text = dateText,
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.secondary
+                                    )
                                 }
                             }
                             IconButton(onClick = { viewModel.removeFavorite(country) }) {

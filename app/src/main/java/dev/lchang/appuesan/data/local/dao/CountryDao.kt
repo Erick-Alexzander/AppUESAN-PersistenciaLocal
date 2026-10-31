@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CountryDao {
-    @Query("SELECT * FROM favorite_countries")
+    @Query("SELECT * FROM favorite_countries ORDER BY savedAt DESC")
     fun getAllFavorites(): Flow<List<CountryEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

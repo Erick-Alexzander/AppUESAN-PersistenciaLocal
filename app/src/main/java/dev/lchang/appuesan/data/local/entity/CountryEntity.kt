@@ -8,5 +8,6 @@ data class CountryEntity(
     @PrimaryKey
     val name: String,
     val ranking: Int,
-    val imageUrl: String
+    val imageUrl: String,
+    val savedAt: Long = 0L
 )

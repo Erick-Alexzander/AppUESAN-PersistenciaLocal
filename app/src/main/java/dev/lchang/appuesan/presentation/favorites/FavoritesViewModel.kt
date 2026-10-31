@@ -31,7 +31,8 @@ class FavoritesViewModel(application: Application) : AndroidViewModel(applicatio
                     CountryEntity(
                         name = country.name,
                         ranking = country.ranking,
-                        imageUrl = country.imageUrl
+                        imageUrl = country.imageUrl,
+                        savedAt = System.currentTimeMillis()
                     )
                 )
             }
